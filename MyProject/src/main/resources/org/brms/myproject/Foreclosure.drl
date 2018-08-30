@@ -1,0 +1,7 @@
+package org.brms.myproject;
+rule "Had any foreclosure"
+when
+Foreclosure(hadForeclosure=="yes")
+then
+System.out.println("Had a foreclosure in the past five years");
+end

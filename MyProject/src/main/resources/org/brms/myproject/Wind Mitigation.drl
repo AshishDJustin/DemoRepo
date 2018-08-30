@@ -1,0 +1,7 @@
+package org.brms.myproject;
+rule "Check for wind mitigation"
+when
+NewPurchase((windMitigation=="yes")&&(fourPoint!="yes"))
+then
+System.out.println("Wind mitigation was done");
+end

@@ -1,0 +1,8 @@
+package org.brms.myproject;
+//global org.slf4j.Logger logger;
+rule "are you actively repairing"
+when
+ActivelyRepairing(activelyRepairing=="yes")
+then
+System.out.println("The damage is being actively repaired");
+end

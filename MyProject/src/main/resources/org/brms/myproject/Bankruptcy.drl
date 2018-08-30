@@ -1,0 +1,8 @@
+package org.brms.myproject;
+//global org.slf4j.Logger logger;
+rule "Had any bankruptcy"
+when
+Bankruptcy(hadBankruptcy=="yes")
+then
+System.out.println("Had a bankruptcy in the past five years");
+end

@@ -1,0 +1,7 @@
+package org.brms.myproject;
+rule "Check for four point"
+when
+NewPurchase((fourPoint=="yes")&&(windMitigation!="yes"))
+then
+System.out.println("Had a four point inspection");
+end

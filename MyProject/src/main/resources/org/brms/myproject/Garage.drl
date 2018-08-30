@@ -1,0 +1,8 @@
+package org.brms.myproject
+
+rule "Check if he has a garage"
+    when
+        AdditionalStructures((pool!="yes")&&(garage=="yes")&&(trampoline!="yes"))
+    then
+        System.out.println("Have a garage");
+end

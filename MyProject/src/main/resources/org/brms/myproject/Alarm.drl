@@ -1,0 +1,8 @@
+package org.brms.myproject;
+
+rule "Check whether you have an alarm"
+    when
+        Alarm(alarm=="yes")
+    then
+        System.out.println("The building has an alarm installed");
+end

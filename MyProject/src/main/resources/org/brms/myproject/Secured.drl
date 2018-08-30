@@ -1,0 +1,8 @@
+package org.brms.myproject;
+
+rule "Check whether you have a secured community"
+    when
+        Safety(securedCommunity=="yes")
+    then
+        System.out.println("Have a secured community");
+end

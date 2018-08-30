@@ -1,0 +1,8 @@
+package org.brms.myproject;
+rule "To check whether you have business at home"
+when
+HomeBusiness(bussinessInHome=="yes")
+then
+System.out.println("Has business at home and check whether customers come to house");
+end
+

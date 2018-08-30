@@ -1,0 +1,7 @@
+package org.brms.myproject;
+rule "Check wether the structure is Mixed-masonary"
+when
+Construction(constructionType=="Mixed-Masonry")
+then
+System.out.println("The construction type is Mixed masonry frame");
+end

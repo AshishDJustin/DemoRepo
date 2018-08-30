@@ -1,0 +1,155 @@
+package org.brms.myproject;
+//global org.slf4j.Logger logger;
+rule "AmTrad:Check whether have trampoline and is it fenced"
+when	
+AmTrad((Trampoline==true)&&(Trampoline==false))	
+then
+System.out.println(" Trampoline eligible");
+end
+/*
+rule "AmTrad:Number of prior claims"
+when	
+AmTrad(prior_Claims<2)
+then
+System.out.println("Number of property claims eligible");
+end
+*/
+rule "AmTrad:Eligibilty for seasonal occupany"
+when
+AmTrad((secured_community=="Gated with a guard")||(secured_community=="Gated with an automated system"))
+then
+System.out.println("Secondary/Seasonal Occupancy eligible");
+end
+
+rule "AmTrad:Check flat roof percentage"
+when
+AmTrad(flatRoofPercent=="0%")
+then
+System.out.println("Flat roof percentage eligible");
+end
+
+rule "AmTrad:Check masonary to frame ratio"
+when	
+AmTrad(masonryFrame=="Masonry 25% - Frame 75%")
+then
+System.out.println("Masonary frame ratio eligible");
+end
+
+rule "AmTrad:Check the percentage of other structures"
+when
+AmTrad((OtherStructureLimit>1)&&(OtherStructureLimit<21))
+then
+System.out.println("Other Structure Limit is eleigible");
+end
+
+rule "AmTrad:Check quantity of Composition Shingle"
+when
+AmTrad((CompositionShingle>-1)&&(CompositionShingle<16))	
+then
+System.out.println(" eligible Composition Shingle");
+end
+
+rule "AmTrad:Check quantity of Architectual Shingle"
+when
+AmTrad((ArchitectualShingle>-1)&&(ArchitectualShingle<16))
+then
+System.out.println(" eligible Architectual Shingle");
+end
+
+rule "AmTrad:Check quantity of Metal"
+when
+AmTrad((Metal>-1)&&(Metal<41))
+then
+System.out.println(" eligible metal");
+end
+
+rule "AmTrad:Check quantity of Tile"
+when
+AmTrad((Tile>-1)&&(Tile<26))
+then
+System.out.println(" eligible tile");
+end
+
+rule "AmTrad:Check the No Prior Coverage years"
+when
+AmTrad((NoPriorCoverage>-1)&&(NoPriorCoverage>31))	
+then
+System.out.println(" Prior coverage is eligible");
+end
+
+rule "AmTrad:Check whether have farm animals"
+when
+AmTrad(FarmAnimals==true)
+then
+System.out.println(" Farm animals are eligible");
+end
+
+rule "AmTrad:Check whether LLC or Corporate Ownership"
+when	
+AmTrad((LLC=="yes")||(LLC=="no"))	
+then
+System.out.println(" LLC eligible");
+end
+
+rule "AmTrad:Check whether you have Diving Board"
+when	
+AmTrad((DivingBoard=="yes")||(DivingBoard=="no"))
+then
+System.out.println(" Diving board eligible");
+end
+
+rule "AmTrad:Check whether have pool slide"
+when
+AmTrad((PoolSlide=="yes")||(PoolSlide=="no"))
+then
+System.out.println(" PoolSlide eligible");
+end
+
+rule "AmTrad:Check the Plumbing update year"
+when	
+AmTrad(((2018-PlumbingUpdate)>-1)&&((2018-PlumbingUpdate)<26))
+then
+System.out.println(" Plumbing update is eligible");
+end
+
+rule "AmTrad:Check what is the Plumbing type"
+when	
+AmTrad((PlumbingType!=null)&&(PlumbingType!="Polybutylene"))	
+then
+System.out.println(" Plumbing type is eligible");
+end
+
+rule "AmTrad:Check the water coverage"
+when
+AmTrad((WaterCoverage>-1)&&(WaterCoverage<41))	
+then
+System.out.println("Water coverage eligible");
+end
+
+rule "AmTrad:Check the insurance score"
+when
+AmTrad(InsuranceScore=="yes")	
+then
+System.out.println(" Insurance score eligible");
+end
+
+rule "AmTrad:Check the effective year built"
+when
+AmTrad((EffectiveYearBuilt=="yes")||(EffectiveYearBuilt=="no"))	
+then
+System.out.println(" Effective year built eligible");
+end
+
+rule "AmTrad:Dog Policy eligibility for dog breeds"
+when
+AmTrad((DogBreeds!=null)&&(DogBreeds!="Pit Bull")&&(DogBreeds!="Staffordshire Terrier")&&(DogBreeds!="Akita")&&(DogBreeds!="Chow Chow")&&(DogBreeds!="Doberman Pinscher")&&(DogBreeds!="German Shepherd")&&(DogBreeds!="Presa Canario")&&(DogBreeds!="Rottweiler")&&(DogBreeds!="Rhodesian Ridgeback"))
+then
+System.out.println(" Dog breeds are eligible");
+end
+
+rule "AmTrad:Endorsement Eligibility	for dog breeds"
+when
+AmTrad((DogBreeds!=null)&&(DogBreeds!="Pit Bull")&&(DogBreeds!="Staffordshire Terrier")&&(DogBreeds!="Akita")&&(DogBreeds!="Chow Chow")&&(DogBreeds!="Doberman Pinscher")&&(DogBreeds!="German Shepherd")&&(DogBreeds!="Presa Canario")&&(DogBreeds!="Rottweiler")&&(DogBreeds!="Rhodesian Ridgeback"))
+then
+System.out.println(" Dog breeds are eligible for endorsement");
+end

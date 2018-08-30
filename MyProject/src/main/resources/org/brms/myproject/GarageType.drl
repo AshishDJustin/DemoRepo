@@ -1,0 +1,7 @@
+package org.brms.myproject;
+rule "Check if the garage is detached from main building and has a living space"
+when
+Garage(garageType=="detachedHasLivingSpace")
+then
+System.out.println("The garage is detached from main building and has a living space");
+end

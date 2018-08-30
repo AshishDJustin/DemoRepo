@@ -1,0 +1,273 @@
+package org.brms.myproject;
+global java.util.List approve;
+global java.util.List decline;
+global java.util.List submit;
+global java.util.List dogApprove;
+global java.util.List dogDecline;
+global java.util.List plumbApprove;
+global java.util.List plumbDecline;
+rule "AmInt: Approve Other structures"
+    when
+        AmInt((GarageType=="detachedSeperatedStructureWithoutLivingSpace")||(GarageType=="attachedToTheMainHouse"))
+    then
+        approve.add("Other Structure limit");
+        System.out.println("@AmInt: Other Structure limit eligible");
+end
+
+rule "check age of construction"
+    when
+        AmInt(((2018-yearBuilt)>0)&&((2018-yearBuilt)<76))
+    then
+        approve.add("Age of building");
+        System.out.println("@AmInt: Age of building");
+end
+
+rule "AmInt:Approve fenced trampoline"
+    when	
+        AmInt((Trampoline==true)&&(Trampolinefence=="yes"))	
+    then
+        approve.add("Trampoline");
+        System.out.println("@AmInt: Trampoline eligible");
+end
+
+rule "AmInt:Approve number of prior claims"
+    when	
+        AmInt(prior_Claims<1)
+    then
+        approve.add("Prior claims");
+        System.out.println("@AmInt: Number of property claims");
+end
+
+rule "AmInt: Approve Seasonal or secondary occupany"
+    when
+        AmInt((alarm==true)||(secured_community=="Gated with a guard")||(secured_community=="Gated with an automated system"))
+    then
+        approve.add("Seasonal or secondary occupany");
+        System.out.println("@AmInt: Secondary/Seasonal Occupancy");
+end
+
+rule "AmInt: Approve flat roof percentage"
+    when
+        AmInt((flatRoofPercent=="1 - 10%")||(flatRoofPercent=="11 - 20%"))
+    then
+        approve.add("Flat roof percentage");
+        System.out.println("@AmInt: Flat roof percentage eligible");
+end
+
+rule "AmInt: Approve masonary to frame ratio"
+    when	
+        AmInt(masonryFrame=="Masonry 76% or more - Frame 24%")
+    then
+        approve.add("Masonry to frame ratio");
+        System.out.println("@AmInt: Masonary frame ratio eligible");
+end
+
+rule "AmInt: Approve Composition Shingle roof"
+    when
+        AmInt((RoofMaterial=="Comp_Shingle")&&((2018-roofUpdateYear)>-1)&&((2018-roofUpdateYear)<16))	
+    then
+        approve.add("Composition shingle roof");
+        System.out.println("@AmInt: Composition Shingle roof");
+end
+    
+rule "AmInt: Approve Architectual Shingle roof"
+    when
+        AmInt((RoofMaterial=="architectural-shingles")&&((2018-roofUpdateYear)>-1)&&((2018-roofUpdateYear)<21))
+    then
+        approve.add("Architectural shingle roof");
+        System.out.println("@AmInt: Architectual Shingle roof");
+end
+
+rule "AmInt: Approve Metal roof"
+    when
+        AmInt((RoofMaterial=="metal")&&((2018-roofUpdateYear)>-1)&&((2018-roofUpdateYear)<41))
+    then
+        approve.add("Metal roof");
+        System.out.println("@AmInt: Metal roof");
+end
+
+rule "AmInt: Approve Tile roof"
+    when
+        AmInt((RoofMaterial=="block-tiles")&&((2018-roofUpdateYear)>-1)&&((2018-roofUpdateYear)<41))
+    then
+        approve.add("Tile roof");
+        System.out.println("@AmInt: Tile roof");
+end
+
+rule "AmInt: Submit farm animals"
+    when
+        AmInt(FarmAnimals==true)
+    then
+        submit.add("Farm animals");
+        System.out.println("!AmInt: Farm Animals");
+end
+
+rule "AmInt: Approve duplex structure"
+    when
+        AmInt(structureType=="Duplex")	
+    then
+        approve.add("Duplex structure");
+        System.out.println("@AmInt: Duplex structure");
+end
+
+rule "AmInt: Approve Plumbing update year"
+    when	
+        AmInt(((2018-PlumbingUpdate)>-1)&&((2018-PlumbingUpdate)<21))
+    then
+        approve.add("Plumbing update year");
+        System.out.println("@AmInt: Plumbing update year");
+end
+
+rule "AmInt: Approve Plumbing type"
+    when	
+        p:Plumb((PlumbingType!="Pex")&&(PlumbingType!="Polybutylene"))	
+    then
+        plumbApprove.add("Plumbing type "+p.getPlumbingType());
+        System.out.println("@AmInt: Plumbing type "+p.getPlumbingType());
+end
+
+
+rule "AmInt: Decline other structure limit"
+    when
+        AmInt((GarageType!="detachedSeperatedStructureWithoutLivingSpace")&&(GarageType!="attachedToTheMainHouse")&&(GarageType!=""))
+    then
+        decline.add("Other Structure limit");
+        System.out.println("#AmInt: Other Structure limit");
+end
+
+rule "AmInt: Decline age of construction"
+    when
+        AmInt(((2018-yearBuilt)>75)&&(yearBuilt!=25))
+    then    
+        decline.add("Age of building");
+        System.out.println("#AmInt: Age");
+end
+
+rule "AmInt: Decline unfenced trampoline"
+    when	
+        AmInt((Trampoline==true)&&(Trampolinefence!="yes")&&(Trampolinefence!=null))	
+    then
+        decline.add("Trampoline");
+        System.out.println("#AmInt: Unfenced trampoline");
+end
+
+rule "AmInt: Decline number of prior claims"
+    when	
+        AmInt((prior_Claims>0)&&(prior_Claims!=25))
+    then
+        decline.add("Prior claims");
+        System.out.println("#AmInt: Number of property claims");
+end
+
+rule "AmInt: Decline secondary or seasonal occupany"
+    when
+        AmInt((alarm!=true)&&(secured_community!="Gated with a guard")&&(secured_community!="Gated with an automated system")&&(secured_community!=null))
+    then
+        decline.add("Secondary or seasonal occupancy");
+        System.out.println("#AmInt: Secondary/Seasonal Occupancy");
+end
+
+rule "AmInt: Decline flat roof percentage"
+    when
+        AmInt((flatRoofPercent!="1 - 10%")&&(flatRoofPercent!="11 - 20%")&&(flatRoofPercent!=null))
+    then
+        decline.add("Flat roof percentage");
+        System.out.println("#AmInt: Flat roof percentage");
+end
+
+rule "AmInt:Decline Composition Shingle roof"
+    when
+        AmInt((RoofMaterial=="Comp-Shingle")&&((2018-roofUpdateYear)>15))	
+    then
+        decline.add("Composition Shingle roof");
+        System.out.println("#AmInt: Composition Shingle roof");
+end
+
+rule "AmInt: Decline Architectual Shingle roof"
+    when
+        AmInt((RoofMaterial=="architectural-shingles")&&((2018-roofUpdateYear)>20))
+    then
+        decline.add("Architectural shingle roof");
+        System.out.println("#AmInt: Architectual Shingle roof");
+end
+
+rule "AmInt: Decline Metal roof"
+    when
+        AmInt((RoofMaterial=="metal")&&((2018-roofUpdateYear)>40))
+    then
+        decline.add("Metal roof");
+        System.out.println("#AmInt: Metal roof");
+end
+
+rule "AmInt: Decline Tile roof"
+    when
+        AmInt((RoofMaterial=="block-tiles")&&((2018-roofUpdateYear)>40))
+    then
+        decline.add("Tile roof");
+        System.out.println("#AmInt: Tile roof");
+end
+
+
+rule "AmInt:Decline LLC or Corporate Ownership"
+    when	
+        AmInt(LLC=="yes")	
+    then
+        decline.add("LLC or Corporate Ownership");
+        System.out.println("#AmInt: LLC or Corporate ownership");
+end
+
+rule "AmInt:Decline Diving Board"
+    when	
+        AmInt(DivingBoard=="yes")
+    then
+        decline.add("Diving Board");
+        System.out.println("#AmInt: Diving board");
+end
+
+rule "AmInt: Decline pool slide"
+    when
+        AmInt(PoolSlide=="yes")
+    then
+        decline.add("Pool slide");
+        System.out.println("#AmInt: PoolSlide");
+end
+
+rule "AmInt: Decline Plumbing update year"
+    when	
+        AmInt(((2018-PlumbingUpdate)>20)&&(PlumbingUpdate!=0))
+    then
+        decline.add("Plumbing update year");
+        System.out.println("#AmInt: Plumbing update year");
+end
+
+rule "AmInt: Decline Plumbing type"
+    when	
+        p:Plumb((PlumbingType=="Polybutylene")||(PlumbingType=="Pex"))	
+    then
+        plumbDecline.add("Plumbing type "+p.getPlumbingType());
+        System.out.println("#AmInt: Plumbing type "+p.getPlumbingType()+" not eligible");
+end
+
+
+rule "AmInt: Decline dog breeds"
+    when
+        d:Dog((dogBreed=="Wolf_Hybrid")||(dogBreed=="Pit_Bull")||(dogBreed=="Staffordshire_Bull_Terrier")||(dogBreed==null))
+    then
+        dogDecline.add("Dog breed " +d.getDogBreed());
+        System.out.println("#AmInt: Dog breeds "+d.getDogBreed());
+    end
+    
+
+rule "AmInt: Dog Policy eligibility for dog breeds"
+    when
+        d:Dog((dogBreed!="Pit_Bull")&&(dogBreed!="Wolf_Hybrid")&&(dogBreed!="Staffordshire_Bull_Terrier")&&(dogBreed!=null))
+    then
+        dogApprove.add("Dog breed "+d.getDogBreed());
+        System.out.println("@AmInt: Dog breed "+ d.getDogBreed() +" eligible");
+end
+
+
+
+
+    
+

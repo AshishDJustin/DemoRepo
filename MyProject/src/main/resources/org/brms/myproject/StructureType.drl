@@ -1,0 +1,7 @@
+package org.brms.myproject;
+rule "check whether it is a row house or residential"
+when
+StructureType(((houseType!="Residential")||(houseType=="Row"))&&(houseType!="Condominium"))
+then
+System.out.println("The structure type is Row house");
+end

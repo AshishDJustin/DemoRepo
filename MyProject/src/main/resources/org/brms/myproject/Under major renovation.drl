@@ -1,0 +1,7 @@
+package org.brms.myproject;
+rule "to check wether the building is under major rennovations"
+when
+UnderMajorRenovation(underRennovation=="yes")
+then
+System.out.println("The house is under major rennovation");
+end

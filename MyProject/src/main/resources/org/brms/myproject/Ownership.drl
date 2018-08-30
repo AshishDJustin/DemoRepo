@@ -1,0 +1,21 @@
+package org.brms.myproject;
+//lobal java.util.List list1;
+
+rule "Time of Ownership"
+    when
+        Ownership(TimeOwnership<3)
+    then
+  //      list1.add("Have a prior address");
+        System.out.println("Have a prior address");
+        drools.setFocus("New purchase");
+end
+
+rule "Check whether new purchase"
+ruleflow-group "New purchase"
+    when
+        Ownership(TimeOwnership==0)
+    then
+    //    list1.add("The house is a new purchase");
+        System.out.println("The house is a new purchase");
+end
+		   

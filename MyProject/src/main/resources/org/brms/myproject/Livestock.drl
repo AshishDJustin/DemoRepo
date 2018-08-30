@@ -1,0 +1,7 @@
+package org.brms.myproject;
+rule "check wether you have livestock"
+when
+OtherDetails((livestock=="yes")&&(horse!="yes")&&(dog!="yes"))
+then
+System.out.println("Have livestock at the house");
+end

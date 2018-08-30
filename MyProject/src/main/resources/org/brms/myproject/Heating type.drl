@@ -1,0 +1,7 @@
+package org.brms.myproject;
+rule "Check the heating type"
+when
+Heating(heatingType=="OilTank")
+then
+System.out.println("The heating type is oil tank");
+end

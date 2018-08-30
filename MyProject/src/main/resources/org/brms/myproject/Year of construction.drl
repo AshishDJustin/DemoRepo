@@ -1,0 +1,20 @@
+package org.brms.myproject;
+rule "Check whether Constructed before 30 years"
+when
+YearOfConstruction((yearOfConstruction<(year-29))||(yearOfConstruction==year))
+then
+System.out.println("Constructed before 30 years");
+end
+rule "Check whether year of construction is 2018"
+when
+YearOfConstruction(yearOfConstruction==year)
+then
+System.out.println("Constructed in 2018");
+end
+rule "Check whether constructed before 2001"
+when
+YearOfConstruction((yearOfConstruction<2002)||(yearOfConstruction==year))
+then
+System.out.println("Constructed on or before 2001");
+end
+

@@ -1,0 +1,7 @@
+package org.brms.myproject;
+rule "Do you have any unrepaired damage?"
+when
+UnrepairedDamage(unrepairedDamage=="yes")
+then
+System.out.println("Have damages that need to be repaired");
+end
